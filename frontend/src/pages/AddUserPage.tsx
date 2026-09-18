@@ -50,16 +50,17 @@ function AddUserForm() {
 
     try {
       setSaving(true);
-      const account = accounts[0];
+      //const account = accounts[0];
       //if (!account) throw new Error('No signed-in account is available.');
-      const token = await instance.acquireTokenSilent({ ...loginRequest, account });
+      //const token = await instance.acquireTokenSilent({ ...loginRequest, account });
+      
       await createUser({
         name: form.name.trim(),
         age: Number(form.age),
         city: form.city.trim(),
         state: form.state.trim(),
         pincode: form.pincode.trim(),
-      }, token.accessToken);
+      });
       setToast('User created successfully.');
       window.setTimeout(() => navigate('/'), 600);
     } catch (err: unknown) {

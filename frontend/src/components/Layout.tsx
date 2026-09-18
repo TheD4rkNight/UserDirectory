@@ -13,11 +13,11 @@ export default function Layout() {
         <nav aria-label="Main navigation">
           <Link to="/">List</Link>
           <Link to="/add">Add</Link>
-          {authenticated ? (
+          {/* {authenticated ? (
             <button onClick={() => instance.logoutRedirect()}>Sign out</button>
           ) : (
             <button onClick={() => instance.loginRedirect(loginRequest)}>Sign in</button>
-          )}
+          )} */}
         </nav>
       </header>
       <main className="container"><Outlet /></main>

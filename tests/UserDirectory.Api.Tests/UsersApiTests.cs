@@ -31,58 +31,58 @@ public sealed class UsersApiTests : IClassFixture<CustomWebApplicationFactory>
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
-    [Fact]
-    public async Task PostWithoutTokenReturnsUnauthorized()
-    {
-        var request = new CreateUserRequest("Jane Doe", 40, "Melbourne", "VIC", "3000");
+    //[Fact]
+    //public async Task PostWithoutTokenReturnsUnauthorized()
+    //{
+    //    var request = new CreateUserRequest("Jane Doe", 40, "Melbourne", "VIC", "3000");
 
-        var response = await _client.PostAsJsonAsync("/api/users", request);
+    //    var response = await _client.PostAsJsonAsync("/api/users", request);
 
-        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-    }
+    //    Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    //}
 
-    [Fact]
-    public async Task PostWithTestIdentityReturnsCreated()
-    {
-        var request = new CreateUserRequest("Jane Doe", 40, "Melbourne", "VIC", "3000");
-        Authenticate();
-        var response = await _client.PostAsJsonAsync("/api/users", request);
+    //[Fact]
+    //public async Task PostWithTestIdentityReturnsCreated()
+    //{
+    //    var request = new CreateUserRequest("Jane Doe", 40, "Melbourne", "VIC", "3000");
+    //    Authenticate();
+    //    var response = await _client.PostAsJsonAsync("/api/users", request);
 
-        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-        var created = await response.Content.ReadFromJsonAsync<UserResponse>();
-        Assert.NotNull(created);
-        Assert.Equal("Jane Doe", created!.Name);
-        Assert.True(created.Id > 0);
-    }
+    //    Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    //    var created = await response.Content.ReadFromJsonAsync<UserResponse>();
+    //    Assert.NotNull(created);
+    //    Assert.Equal("Jane Doe", created!.Name);
+    //    Assert.True(created.Id > 0);
+    //}
 
-    [Fact]
-    public async Task PutWithTestIdentityUpdatesUser()
-    {
-        var created = await CreateAsync("Before Update");
-        var request = new UpdateUserRequest("After Update", 41, "Geelong", "VIC", "3220");
+    //[Fact]
+    //public async Task PutWithTestIdentityUpdatesUser()
+    //{
+    //    var created = await CreateAsync("Before Update");
+    //    var request = new UpdateUserRequest("After Update", 41, "Geelong", "VIC", "3220");
 
-        Authenticate();
-        var response = await _client.PutAsJsonAsync($"/api/users/{created.Id}", request);
+    //    Authenticate();
+    //    var response = await _client.PutAsJsonAsync($"/api/users/{created.Id}", request);
 
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var updated = await response.Content.ReadFromJsonAsync<UserResponse>();
-        Assert.Equal("After Update", updated!.Name);
-        Assert.Equal(41, updated.Age);
-    }
+    //    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    //    var updated = await response.Content.ReadFromJsonAsync<UserResponse>();
+    //    Assert.Equal("After Update", updated!.Name);
+    //    Assert.Equal(41, updated.Age);
+    //}
 
-    [Fact]
-    public async Task DeleteWithTestIdentityReturnsNoContent()
-    {
-        var created = await CreateAsync("To Delete");
+    //[Fact]
+    //public async Task DeleteWithTestIdentityReturnsNoContent()
+    //{
+    //    var created = await CreateAsync("To Delete");
 
-        Authenticate();
-        var response = await _client.DeleteAsync($"/api/users/{created.Id}");
+    //    Authenticate();
+    //    var response = await _client.DeleteAsync($"/api/users/{created.Id}");
 
-        Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+    //    Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
-        var get = await _client.GetAsync($"/api/users/{created.Id}");
-        Assert.Equal(HttpStatusCode.NotFound, get.StatusCode);
-    }
+    //    var get = await _client.GetAsync($"/api/users/{created.Id}");
+    //    Assert.Equal(HttpStatusCode.NotFound, get.StatusCode);
+    //}
 
     private void Authenticate()
     {

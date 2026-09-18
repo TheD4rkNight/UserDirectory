@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using UserDirectory.Infrastructure.Persistence;
+using UserDirectory.Infrastructure;
 
 namespace UserDirectory.Api.Tests;
 

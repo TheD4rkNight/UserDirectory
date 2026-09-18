@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UserDirectory.Application.Common;
 using UserDirectory.Domain.Entities;
 
-namespace UserDirectory.Infrastructure.Persistence;
+namespace UserDirectory.Infrastructure;
 
 public sealed partial class AppDbContext : DbContext, IUnitOfWork
 {

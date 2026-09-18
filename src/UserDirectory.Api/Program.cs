@@ -8,7 +8,6 @@ using UserDirectory.Api.Authorization;
 using UserDirectory.Api.Middleware;
 using UserDirectory.Application.Users;
 using UserDirectory.Infrastructure;
-using UserDirectory.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,6 +85,10 @@ builder.Services.AddRateLimiter(options =>
         limiterOptions.AutoReplenishment = true;
     });
 });
+
+// 1. MUST BE REGISTERED HERE (Before builder.Build())
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

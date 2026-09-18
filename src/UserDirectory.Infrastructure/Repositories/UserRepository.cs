@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UserDirectory.Application.Users;
 using UserDirectory.Domain.Entities;
-using UserDirectory.Infrastructure.Persistence;
 
 namespace UserDirectory.Infrastructure.Repositories;
 

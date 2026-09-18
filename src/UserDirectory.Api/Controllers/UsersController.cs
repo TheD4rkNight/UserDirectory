@@ -23,7 +23,8 @@ public sealed class UsersController(IUserService service) : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Policy = ScopeAuthorization.PolicyName)]
+    [AllowAnonymous]
+    //[Authorize(Policy = ScopeAuthorization.PolicyName)]
     public async Task<ActionResult<UserResponse>> Create(
         CreateUserRequest request,
         CancellationToken cancellationToken)
@@ -33,7 +34,8 @@ public sealed class UsersController(IUserService service) : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    [Authorize(Policy = ScopeAuthorization.PolicyName)]
+    [AllowAnonymous]
+    //[Authorize(Policy = ScopeAuthorization.PolicyName)]
     public async Task<ActionResult<UserResponse>> Update(
         int id,
         UpdateUserRequest request,
@@ -44,7 +46,8 @@ public sealed class UsersController(IUserService service) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize(Policy = ScopeAuthorization.PolicyName)]
+    //[Authorize(Policy = ScopeAuthorization.PolicyName)]
+    [AllowAnonymous]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         => await service.DeleteAsync(id, cancellationToken) ? NoContent() : NotFound();
 }

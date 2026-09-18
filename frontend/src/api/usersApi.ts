@@ -22,12 +22,11 @@ export function getUsers(signal?: AbortSignal): Promise<User[]> {
   return request<User[]>(`${API_BASE_URL}/users`, { signal });
 }
 
-export function createUser(user: CreateUserRequest, accessToken: string): Promise<User> {
+export function createUser(user: CreateUserRequest): Promise<User> {
   return request<User>(`${API_BASE_URL}/users`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(user),
   });

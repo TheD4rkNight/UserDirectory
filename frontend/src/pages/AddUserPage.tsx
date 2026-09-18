@@ -51,7 +51,7 @@ function AddUserForm() {
     try {
       setSaving(true);
       const account = accounts[0];
-      if (!account) throw new Error('No signed-in account is available.');
+      //if (!account) throw new Error('No signed-in account is available.');
       const token = await instance.acquireTokenSilent({ ...loginRequest, account });
       await createUser({
         name: form.name.trim(),
@@ -98,8 +98,8 @@ function AddUserForm() {
 
 export default function AddUserPage() {
   return (
-    <RequireAuth>
+    // <RequireAuth>
       <AddUserForm />
-    </RequireAuth>
+    // </RequireAuth>
   );
 }

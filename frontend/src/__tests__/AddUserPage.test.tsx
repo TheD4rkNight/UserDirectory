@@ -24,7 +24,7 @@ const mockedCreateUser = vi.mocked(createUser);
 
 beforeEach(() => {
   vi.resetAllMocks();
-  acquireTokenSilent.mockResolvedValue({ accessToken: 'test-token' });
+  //acquireTokenSilent.mockResolvedValue({ accessToken: 'test-token' });
 });
 
 describe('AddUserPage', () => {
@@ -63,8 +63,7 @@ describe('AddUserPage', () => {
     await user.type(screen.getByLabelText('Pincode'), '3000');
     await user.click(screen.getByRole('button', { name: 'Add User' }));
     await waitFor(() => expect(mockedCreateUser).toHaveBeenCalledWith(
-      { name: 'Jane Doe', age: 40, city: 'Melbourne', state: 'VIC', pincode: '3000' },
-      'test-token',
+      { name: 'Jane Doe', age: 40, city: 'Melbourne', state: 'VIC', pincode: '3000' }
     ));
     expect(screen.getByRole('status')).toHaveTextContent('User created successfully.');
   });

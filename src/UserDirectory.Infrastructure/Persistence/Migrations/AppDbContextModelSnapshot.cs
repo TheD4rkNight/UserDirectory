@@ -8,7 +8,7 @@ using UserDirectory.Infrastructure.Persistence;
 namespace UserDirectory.Infrastructure.Persistence.Migrations;
 
 [DbContext(typeof(AppDbContext))]
-partial class AppDbContextModelSnapshot : ModelSnapshot
+sealed partial class AppDbContextModelSnapshot : ModelSnapshot
 {
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -16,8 +16,6 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
         modelBuilder
             .HasAnnotation("ProductVersion", "8.0.20")
             .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-        SqliteModelBuilderExtensions.UseAutoincrementColumns(modelBuilder);
 
         modelBuilder.Entity("UserDirectory.Domain.Entities.User", b =>
         {

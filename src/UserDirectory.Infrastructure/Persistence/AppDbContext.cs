@@ -4,7 +4,7 @@ using UserDirectory.Domain.Entities;
 
 namespace UserDirectory.Infrastructure.Persistence;
 
-public sealed class AppDbContext : DbContext, IUnitOfWork
+public sealed partial class AppDbContext : DbContext, IUnitOfWork
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

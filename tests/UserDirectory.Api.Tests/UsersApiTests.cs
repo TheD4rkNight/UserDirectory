@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using UserDirectory.Application.Users;
+using Xunit;
 
 namespace UserDirectory.Api.Tests;
 
@@ -15,7 +16,7 @@ public sealed class UsersApiTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Fact]
-    public async Task GetUsers_ReturnsOkAndEmptyArrayInitially()
+    public async Task GetUsersReturnsOkAndEmptyArrayInitially()
     {
         var response = await _client.GetAsync("/api/users");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -24,14 +25,14 @@ public sealed class UsersApiTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Fact]
-    public async Task GetUnknownUser_ReturnsNotFound()
+    public async Task GetUnknownUserReturnsNotFound()
     {
         var response = await _client.GetAsync("/api/users/999999");
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
     [Fact]
-    public async Task PostWithoutToken_ReturnsUnauthorized()
+    public async Task PostWithoutTokenReturnsUnauthorized()
     {
         var request = new CreateUserRequest("Jane Doe", 40, "Melbourne", "VIC", "3000");
 
@@ -41,7 +42,7 @@ public sealed class UsersApiTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Fact]
-    public async Task PostWithTestIdentity_ReturnsCreated()
+    public async Task PostWithTestIdentityReturnsCreated()
     {
         var request = new CreateUserRequest("Jane Doe", 40, "Melbourne", "VIC", "3000");
         Authenticate();
@@ -55,7 +56,7 @@ public sealed class UsersApiTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Fact]
-    public async Task PutWithTestIdentity_UpdatesUser()
+    public async Task PutWithTestIdentityUpdatesUser()
     {
         var created = await CreateAsync("Before Update");
         var request = new UpdateUserRequest("After Update", 41, "Geelong", "VIC", "3220");
@@ -70,7 +71,7 @@ public sealed class UsersApiTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Fact]
-    public async Task DeleteWithTestIdentity_ReturnsNoContent()
+    public async Task DeleteWithTestIdentityReturnsNoContent()
     {
         var created = await CreateAsync("To Delete");
 

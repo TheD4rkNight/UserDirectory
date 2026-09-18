@@ -2,13 +2,14 @@ using Moq;
 using UserDirectory.Application.Common;
 using UserDirectory.Application.Users;
 using UserDirectory.Domain.Entities;
+using Xunit;
 
 namespace UserDirectory.Application.Tests;
 
 public sealed class UserServiceTests
 {
     [Fact]
-    public async Task CreateAsync_AddsUserAndReturnsResponse()
+    public async Task CreateAsyncAddsUserAndReturnsResponse()
     {
         var repository = new Mock<IUserRepository>();
         var unitOfWork = new Mock<IUnitOfWork>();
@@ -26,7 +27,7 @@ public sealed class UserServiceTests
     }
 
     [Fact]
-    public async Task GetByIdAsync_WhenMissing_ReturnsNull()
+    public async Task GetByIdAsyncWhenMissingReturnsNull()
     {
         var repository = new Mock<IUserRepository>();
         repository.Setup(x => x.GetByIdAsync(99, It.IsAny<CancellationToken>()))
@@ -39,7 +40,7 @@ public sealed class UserServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_WhenFound_UpdatesAndSaves()
+    public async Task UpdateAsyncWhenFoundUpdatesAndSaves()
     {
         var user = new User("Old Name", 30, "Sydney", "NSW", "2000");
         var repository = new Mock<IUserRepository>();
@@ -59,7 +60,7 @@ public sealed class UserServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_WhenFound_RemovesAndSaves()
+    public async Task DeleteAsyncWhenFoundRemovesAndSaves()
     {
         var user = new User("John Doe", 25, "Geelong", "VIC", "3220");
         var repository = new Mock<IUserRepository>();

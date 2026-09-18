@@ -1,0 +1,35 @@
+services:
+  api:
+    build:
+      context: ./src
+      dockerfile: UserDirectory.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: Data Source=/data/app.db
+      AzureAd__Instance: https://login.microsoftonline.com/
+      AzureAd__TenantId: ${ENTRA_TENANT_ID:-common}
+      AzureAd__ClientId: ${ENTRA_API_CLIENT_ID:-REPLACE_WITH_API_APP_CLIENT_ID}
+      AzureAd__Audience: api://${ENTRA_API_CLIENT_ID:-REPLACE_WITH_API_APP_CLIENT_ID}
+      Cors__AllowedOrigins__0: http://localhost:3000
+    volumes:
+      - user-directory-data:/data
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  user-directory-data:

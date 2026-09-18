@@ -1,6 +1,6 @@
 # User Directory — .NET 8 + React + SQLite + Microsoft Entra ID
 
-A copy-paste-ready full-stack User Directory reference project using Clean Architecture.
+A full-stack User Directory reference project using Clean Architecture.
 
 ## Stack
 

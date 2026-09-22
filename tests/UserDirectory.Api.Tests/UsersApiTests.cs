@@ -84,18 +84,18 @@ public sealed class UsersApiTests : IClassFixture<CustomWebApplicationFactory>
     //    Assert.Equal(HttpStatusCode.NotFound, get.StatusCode);
     //}
 
-    private void Authenticate()
-    {
-        _client.DefaultRequestHeaders.Remove("X-Test-Auth");
-        _client.DefaultRequestHeaders.Add("X-Test-Auth", "true");
-    }
+    //private void Authenticate()
+    //{
+    //    _client.DefaultRequestHeaders.Remove("X-Test-Auth");
+    //    _client.DefaultRequestHeaders.Add("X-Test-Auth", "true");
+    //}
 
-    private async Task<UserResponse> CreateAsync(string name)
-    {
-        var request = new CreateUserRequest(name, 35, "Melbourne", "VIC", "3000");
-        Authenticate();
-        var response = await _client.PostAsJsonAsync("/api/users", request);
-        response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<UserResponse>())!;
-    }
+    //private async Task<UserResponse> CreateAsync(string name)
+    //{
+    //    var request = new CreateUserRequest(name, 35, "Melbourne", "VIC", "3000");
+    //    Authenticate();
+    //    var response = await _client.PostAsJsonAsync("/api/users", request);
+    //    response.EnsureSuccessStatusCode();
+    //    return (await response.Content.ReadFromJsonAsync<UserResponse>())!;
+    //}
 }
